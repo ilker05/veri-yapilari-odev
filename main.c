@@ -2,7 +2,7 @@
 
 // İsim SOYİSİM: İlker Mırık
 // Öğrenci Numarası: 2420161145
-// BTK Akademi Sertifika Bağlantısı: https://github.com/ilker05/veri-yapilari-odev/blob/main/sertifika.pdf
+// BTK Akademi Sertifika Bağlantısı: https://www.btkakademi.gov.tr/portal/certificate/validate?certificateId=WJ1SkNNkmw
 
 void bubbleSort(int dizi[], int n) {
     int i, j, temp;
