@@ -4,10 +4,17 @@
 // Öğrenci Numarası: 2420161145
 // BTK Akademi Sertifika Bağlantısı: https://www.btkakademi.gov.tr/portal/certificate/validate?certificateId=WJ1SkNNkmw
 
+#include <stdio.h>
+
+// siralama fonksiyonu
 void bubbleSort(int dizi[], int n) {
     int i, j, temp;
+    
+    // eleman sayisi kadar doner
     for (i = 0; i < n - 1; i++) {
-        for (j = 0; j < n - i - 1; j++) {
+        // siralananlari atla
+        for (j = 0; j < n - 1 - i; j++) {
+            // buyukse yer degis
             if (dizi[j] > dizi[j + 1]) {
                 temp = dizi[j];
                 dizi[j] = dizi[j + 1];
@@ -17,41 +24,57 @@ void bubbleSort(int dizi[], int n) {
     }
 }
 
-int binarySearch(int dizi[], int sol, int sag, int aranan) {
-    while (sol <= sag) {
-        int orta = sol + (sag - sol) / 2;
-        if (dizi[orta] == aranan)
-            return orta;
-        if (dizi[orta] < aranan)
-            sol = orta + 1;
-        else
-            sag = orta - 1;
+// arama fonksiyonu
+int binarySearch(int dizi[], int n, int aranan) {
+    int ilk = 0;
+    int son = n - 1;
+    int orta;
+
+    while (ilk <= son) {
+        orta = (ilk + son) / 2; // ortayi bul
+
+        if (dizi[orta] == aranan) {
+            return orta; // buldu
+        }
+        else if (dizi[orta] < aranan) {
+            ilk = orta + 1; // saga bak
+        }
+        else {
+            son = orta - 1; // sola bak
+        }
     }
-    return -1;
+    return -1; // yoksa -1 don
 }
 
 int main() {
-    int dizi[] = {64, 34, 25, 12, 22, 11, 90};
-    int n = sizeof(dizi) / sizeof(dizi[0]);
-    int aranan, i;
+    // ornek sayilar
+    int dizi[] = {21, 13, 9, 12, 4};
+    int n = 5;
+    int aranan, sonuc;
+    int i;
 
+    printf("Dizi ilk hali:\n");
+    for(i=0; i<n; i++) printf("%d ", dizi[i]);
+    printf("\n\n");
+
+    // once sirala
     bubbleSort(dizi, n);
 
-    printf("Siralanmis Dizi: \n");
-    for (i = 0; i < n; i++) {
-        printf("%d ", dizi[i]);
-    }
-    printf("\n");
+    printf("Sirali hali:\n");
+    for(i=0; i<n; i++) printf("%d ", dizi[i]);
+    printf("\n\n");
 
-    printf("Aranacak sayiyi giriniz: ");
+    printf("Aranacak sayi: ");
     scanf("%d", &aranan);
 
-    int sonuc = binarySearch(dizi, 0, n - 1, aranan);
+    // aramayi yap
+    sonuc = binarySearch(dizi, n, aranan);
 
-    if (sonuc != -1)
-        printf("Sayi bulundu, indeks: %d\n", sonuc);
-    else
+    if (sonuc != -1) {
+        printf("Sayi %d. sirada bulundu.\n", sonuc);
+    } else {
         printf("Sayi bulunamadi.\n");
+    }
 
     return 0;
 }
